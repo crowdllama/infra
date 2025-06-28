@@ -96,8 +96,7 @@ resource "linode_instance" "dht_server" {
   # Start the CrowdLlama DHT service
   provisioner "remote-exec" {
     inline = [
-      "systemctl start crowdllama-dht.service",
-      "systemctl status crowdllama-dht.service"
+      "systemctl start crowdllama-dht.service"
     ]
 
     connection {
