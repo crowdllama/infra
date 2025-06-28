@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  dht:
+    image: ghcr.io/matiasinsaurralde/crowdllama/dht:latest
+    container_name: crowdllama-dht
+    restart: unless-stopped
+    command: ["start", "--verbose"]
+    ports:
+      - "9000:9000"
+    environment:
+      - DHT_PORT=9000
+      - DHT_HOST=0.0.0.0
+    volumes:
+      - dht_data:/app/data
+    networks:
+      - crowdllama-network
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "com.centurylinklabs.watchtower.scope=crowdllama-dht"
+
+  watchtower:
+    image: containrrr/watchtower:latest
+    container_name: crowdllama-watchtower
+    restart: unless-stopped
+    environment:
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_POLL_INTERVAL=300
+      - WATCHTOWER_INCLUDE_STOPPED=true
+      - WATCHTOWER_REVIVE_STOPPED=true
+      - WATCHTOWER_SCOPE=crowdllama-dht
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - crowdllama-network
+    command: --interval 300 --cleanup --include-stopped --revive-stopped
+
+volumes:
+  dht_data:
+    driver: local
+
+networks:
+  crowdllama-network:
+    driver: bridge 

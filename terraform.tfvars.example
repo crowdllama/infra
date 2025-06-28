@@ -1,0 +1,28 @@
+# Copy this file to terraform.tfvars and fill in your values
+# cp terraform.tfvars.example terraform.tfvars
+
+# Required: Your Linode API token
+# Get this from https://cloud.linode.com/profile/tokens
+linode_token = "your-linode-api-token-here"
+
+# Required: Root password for the Linode instance
+# Must be at least 6 characters long
+root_password = "your-secure-root-password-here"
+
+# Optional: Environment name (default: prod)
+environment = "prod"
+
+# Optional: Linode region (default: us-east)
+# Available regions: us-east, us-west, us-central, us-southeast, us-southwest, 
+#                    ap-west, ap-southeast, ap-south, ap-northeast, eu-central, 
+#                    eu-west, ap-southeast-1, us-east-1
+linode_region = "us-east"
+
+# Optional: Linode instance type (default: g6-standard-1)
+# Available types: https://www.linode.com/docs/products/compute/compute-instances/plans/
+linode_instance_type = "g6-standard-1"
+
+# Optional: DNS configuration (set to true if you want DNS records)
+create_dns_record = false
+domain_id = null
+dns_subdomain = "dht" 
