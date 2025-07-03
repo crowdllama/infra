@@ -13,7 +13,7 @@ variable "environment" {
 variable "linode_region" {
   description = "Linode region for the DHT server"
   type        = string
-  default     = "us-east"
+  default     = "us-central"
 }
 
 variable "linode_instance_type" {
@@ -44,4 +44,16 @@ variable "dns_subdomain" {
   description = "DNS subdomain for the DHT server"
   type        = string
   default     = "dht"
+}
+
+variable "domain_soa_email" {
+  description = "SOA email address for the crowdllama.ai domain"
+  type        = string
+  default     = "admin@crowdllama.ai"
+}
+
+variable "enable_vpc" {
+  description = "Whether to enable VPC (only supported in certain regions)"
+  type        = bool
+  default     = false
 } 
